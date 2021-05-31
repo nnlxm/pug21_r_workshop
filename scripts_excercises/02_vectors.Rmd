@@ -48,6 +48,9 @@ Observe your environment pane while running it!
 People sometimes mock how unnecessarily complex it is - there just could have been a clear, simple function with a sensible name to achieve this.
 However, `rm()` is a function to *r*e*m*ove things from the environment.
 So if I create a variable ...
+```{r}
+c
+```
 
 ```{r}
 # create dummy variable
@@ -73,6 +76,7 @@ Instead of explaining what vectors are, it's easiest to first look at one:
 
 ```{r}
 # a vector with whole numbers
+c(1, 7, 12, 4, 2)
 ```
 
 You can see that this vector contains four numbers.
@@ -83,18 +87,22 @@ Here is another one:
 
 ```{r}
 # a vector with numbers that have different decimal places
+c(2, 3.36, 9, 5.0032)
+# zeigt so viele Nachkommastellen, wie die längste eingegebene Dez.zahl
 ```
 
 And another one:
 
 ```{r}
 # a vector with characters
+c("Hallo", "Kuchen", "Keks")
 ```
 
 And another one:
 
 ```{r}
 # a vector with logicals
+c(TRUE, FALSE, FALSE)
 ```
 
 We see that a vector is a collection of elements, and it can consist of all the data types we previously got to know.
@@ -103,6 +111,8 @@ This does not work:
 
 ```{r}
 # mix numeric, character and logical in a vector
+c(10, "Keks", TRUE) #geht nicht! dann wird alles als character gemacht
+c(10, TRUE)         #jetzt wird alles als integer gemacht (steht über Zahl)
 ```
 
 It seems like it did work, but the quotation marks indicate that everything has just been turned into a character!
@@ -127,6 +137,7 @@ This will not work:
 
 ```{r error = TRUE}
 # a vector without c()
+(1, 6, 3)
 ```
 
 It's likely that you will forget `c()` a lot in the beginning, but that will go away.
@@ -135,16 +146,41 @@ Of course, vectors can be saved into variables, just like we did with single ele
 
 ```{r}
 # store vector in a variable
+myvector <- c(1,4,9)
 # print vector
+myvector
 ```
 
 [^one_element_vector]: In fact, we worked with vectors before! When we have e.g. `"hello"`, that is a one-element character vector. And `2` is a one-element integer vector. We don't need `c()` here, because we don't combine anything.
 
 1.1) By the way: I sneaked in a vector in disguise in the "basics" exercises that doesn't use the `c()` function. Can you find it?
 
+```{r}
+1:4
+sequence_vector <- 1:4
+sequence_vector
+```
+
 1.2) Create some vectors. Create one vector with characters, one with whole numbers, one with decimals and one with logicals. Save them all into different variables.
+```{r}
+conditions <- c("dark", "light")
+conditions
+subjects <- 1:20
+subjects
+visual_acuracy <- c(1, 0.5, 0.8)
+visual_acuracy
+experiment_complete <- c(TRUE, FALSE) 
+experiment_complete
+```
 
 1.3) We saw that the `c()` function combines elements into a vector, but it can also combine vectors! Try to combine some of the vectors you previously created using the `c()` function.
+```{r}
+combined_vector1 <- c(visual_acuracy, subjects)
+combined_vector1 # Werte beider Variablen werden dann chronologisch hintereinander geschrieben
+```
+
+
+
 
 ### Mathematical operations
 
@@ -152,16 +188,26 @@ The important thing about vectors is that you can do mathematical operations wit
 Can you figure out what happens here?
 
 ```{r}
-c(1, 2, 5) + 1
+c(1, 2, 5) + 1 # jedes Element des Vektors + 1
 ```
 
 What do you expect the following code will produce?
 
 1.2) `c(1, 2, 5) - 1`
+```{r}
+c(1, 2, 5) -1 # jedes Element des Vektors -1
+```
 
 1.3) `c(1, 2, 5) * 2`
+```{r}
+c(1, 2, 5) * 2 # jedes Element des Vektors * 2
+
+```
 
 1.4) `c(1, 2, 5) / 2`
+```{r}
+c(1, 2, 5) / 2 # jedes Element des Vektors/ 2
+```
 
 Vectors are one of the most important concepts of `R`.
 Sure, other programming languages have similar things, but what is really important in `R` is that a lot of things are "vectorised".
@@ -194,13 +240,23 @@ c(2, 4, 6, 5) + c(1, 10)
 Let's look at this concept some more.
 
 1.8) Can you multiply every other element of `c(2, 4, 6, 4, 9, 12)` with 2?
+```{r}
+c(2, 4, 6, 4, 9, 12) * c(1,2) # dh jedes 2. Element soll mit 2 multipliert werden
+
+```
 
 1.9) Given `c(2, 4, 6, 4, 9, 12)`, subtract 1 from the first element, 2 from the second, 3 from the third, then again 1 from the fourth and so on.
+```{r}
+c(2, 4, 6, 4, 9, 12)-c(1,2,3)
+c(2, 4, 6, 4, 9, 12)-1:3 #die Konvention ist es wohl, es so zu schreiben
+c(2, 4, 6, 4, 9, 12)-c(1:3, 1:3) #oder so
+```
 
 1.10) Run the following code cell. What happened here? Is that bad?
 
 ```{r}
-c(2, 4, 6, 4, 9, 12) + c(1, 2, 3, 4)
+c(2, 4, 6, 4, 9, 12) + c(1, 2, 3, 4) # die Fehlermeldung ist nicht schlimm, die Rechnung stimmt trotzdem noch - dann werden die hinteren Elemente des 2. Vektors nicht auch noch ein 2. Mal mit Elementen des 1. Vektors verrechnet
+#meistens ist es aber nicht das, was wir wollen, also ist es gut, dass wir eine Fehlermeldung bekommen
 ```
 
 Just as a little reminder, run exercises 1.5 - 1.7 again, but this time, save the vectors into variables.
